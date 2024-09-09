@@ -26,6 +26,12 @@
                 </a>
             </li>
 
+            <li class="nav-item" style="{{ $currentRoute == 'real_list' ? 'background-color: white;' : '' }}">
+                <a href="{{ route('real_list') }}" style="{{ $currentRoute == 'real_list' ? 'color: #e8146c;' : 'color: white;' }}">
+                    <span>Real List</span>
+                </a>
+            </li>
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="{{ in_array($currentRoute, ['device_activation_report', 'warranty_check_report']) ? 'true' : 'false' }}" style="color: white;">
                     Reports

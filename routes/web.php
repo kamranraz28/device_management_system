@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\FrontDeskController;
+use App\Http\Controllers\FrontDeskController; 
+use App\Http\Controllers\ClientController;
 
 
 /*
@@ -45,6 +46,9 @@ Route::get('/warranty_activation', [FrontdeskController::class, 'warranty_activa
 
 Route::get('/device_activation_report', [FrontdeskController::class, 'device_activation_report'])->name('device_activation_report');
 
+Route::get('/real_list', [ClientController::class, 'real_list'])->name('real_list');
+
+Route::post('/display/{sn}', [ClientController::class, 'display'])->name('display');
 
 
 
