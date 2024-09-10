@@ -28,7 +28,7 @@
 
             <li class="nav-item" style="{{ $currentRoute == 'real_list' ? 'background-color: white;' : '' }}">
                 <a href="{{ route('real_list') }}" style="{{ $currentRoute == 'real_list' ? 'color: #e8146c;' : 'color: white;' }}">
-                    <span>Real List</span>
+                    <span>Registered Device List (Real)</span>
                 </a>
             </li>
 

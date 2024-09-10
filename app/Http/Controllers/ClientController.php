@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
+
 
 class ClientController extends Controller
 {
@@ -30,12 +32,60 @@ class ClientController extends Controller
     }
 
 
+    public function send($sn)
+    {
+        // dd($sn);
+        // Access the JSON data
+        $message = null;
+        return view('frontdesk.sendData', compact('sn','message'));
+    
+    }
+
     public function display(Request $request, $sn)
     {
-        // Access the JSON data
-        $data = $request->json()->all();
-        dd($sn);
+        $baseUrl = 'http://167.172.83.81:3000';
+
+        // Construct the URL with the 'sn' as part of the path
+        $url = "$baseUrl/display/$sn";
+
+        // Perform the POST request with the 'message' field
+        $response = Http::post($url, [
+            'message' => $request->input('message')
+        ]);
+
+        $message = "Message sent successfully to the device $sn.";
+        
+        return view('frontdesk.sendData', compact('sn','message'));
     }
+
+    public function qrcode_view($sn)
+    {
+        // dd($sn);
+        // Access the JSON data
+        $message = null;
+        return view('frontdesk.qrcode_view', compact('sn','message'));
+    
+    }
+
+    public function qr(Request $request, $sn)
+    {
+        $baseUrl = 'http://167.172.83.81:3000';
+
+        // Construct the URL with the 'sn' as part of the path
+        $url = "$baseUrl/qr/$sn";
+
+        // Perform the POST request with the 'message' field
+        $response = Http::post($url, [
+            'message' => $request->input('message')
+        ]);
+
+        $message = "QR sent successfully to the device $sn.";
+        
+        return view('frontdesk.qrcode_view', compact('sn','message'));
+    }
+
+    
+
 
 
 }

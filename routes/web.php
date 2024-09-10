@@ -48,7 +48,14 @@ Route::get('/device_activation_report', [FrontdeskController::class, 'device_act
 
 Route::get('/real_list', [ClientController::class, 'real_list'])->name('real_list');
 
+Route::get('/send/{sn}', [ClientController::class, 'send'])->name('send');
+
 Route::post('/display/{sn}', [ClientController::class, 'display'])->name('display');
+
+Route::get('/qrcode_view/{sn}', [ClientController::class, 'qrcode_view'])->name('qrcode_view');
+
+
+Route::post('/qr/{sn}', [ClientController::class, 'qr'])->name('qr');
 
 
 

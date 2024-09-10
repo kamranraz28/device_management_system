@@ -186,29 +186,7 @@
 <script src="{{ asset('assets/js/circle-progress.min.js') }}"></script>
 
 <script src="{{ asset('assets/js/script.js') }}"></script>
-<script>
-    $(document).ready(function () {
-        $('#datatable').DataTable({
-            "paging": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "lengthMenu": [10, 25, 50, 75, 100],
-            "pageLength": 10,
-            "order": [],
-            "columnDefs": [{
-                "targets": [0, 6],
-                "orderable": false
-            }],
-            "language": {
-                "paginate": {
-                    "previous": "&lt;",
-                    "next": "&gt;"
-                }
-            }
-        });
-    });
-</script>
+
 
 <script>
     document.querySelectorAll('.status-toggle').forEach(toggle => {

@@ -9,9 +9,9 @@
                         <span></span>
                     </span>
                 </a>
-                <a href="" class="navbar-brand logo">
-                    <img src="{{ asset('assets/img/logo.png') }}" class="" alt="Logo">
-                </a>
+                <a href="#" class="navbar-brand logo">
+                    <img src="{{ asset('assets/img/logo.png') }}" style="width:120px;" alt="Logo"> @demo
+                </a> 
             </div>
             <div class="main-menu-wrapper">
                 <div class="menu-header">
