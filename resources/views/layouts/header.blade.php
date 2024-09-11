@@ -22,7 +22,7 @@
                         <i class="fas fa-times"></i>
                     </a>
                 </div>
-                <ul class="main-nav">
+                <!-- <ul class="main-nav">
                     <li class="has-submenu">
                         <a href="{{ route('home') }}" style="color: white;">Home <i class=""></i></a>
                     </li>
@@ -30,7 +30,7 @@
                     <li class="has-submenu">
                         <a href="{{ route('login') }}" style="color: white;">Login <i class=""></i></a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </nav>
     </div>

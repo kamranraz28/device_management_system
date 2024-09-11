@@ -6,7 +6,10 @@ use App\Models\Department;
 use App\Models\VisitDetail;
 use Illuminate\Http\Request;
 use App\Models\Visitor;
+use App\Models\User;
 use App\Models\Staff;
+use Illuminate\Support\Facades\Hash;
+
 
 class FrontdeskController extends Controller
 {
@@ -92,6 +95,61 @@ class FrontdeskController extends Controller
     public function device_activation_report()
     {
         return view('frontdesk.device_activation_report');
+    }
+
+    public function stock_report()
+    {
+        return view('frontdesk.stock_report');
+    }
+
+    public function registered_device_report()
+    {
+        return view('frontdesk.registered_device_report');
+    }
+
+    public function unregistered_device_report()
+    {
+        return view('frontdesk.unregistered_device_report');
+    }
+
+    public function device_repair_report()
+    {
+        return view('frontdesk.device_repair_report');
+    }
+
+    public function user()
+    {
+        $visitors = User::all();
+        // dd($visitors);
+        $newCount = $visitors->count();
+        // dd($newCount);
+
+        
+
+        return view('frontdesk.userList',compact('visitors','newCount'));
+    }
+
+    public function new_user_add()
+    {
+        return view('frontdesk.addNewUser');
+    }
+
+    public function storeUser(Request $request)
+    {
+        $user = new User();
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make('12345678');
+        $user->level = $request->level;
+
+        $user->save();
+        return redirect()->back()->with('success_message', 'User Has Been Successfully Created.');
+    }
+
+    public function total_device()
+    {
+        return view('frontdesk.total_device');
     }
     
 }

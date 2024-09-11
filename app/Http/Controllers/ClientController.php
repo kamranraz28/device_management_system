@@ -43,6 +43,7 @@ class ClientController extends Controller
 
     public function display(Request $request, $sn)
     {
+        // dd($request->all());
         $baseUrl = 'http://167.172.83.81:3000';
 
         // Construct the URL with the 'sn' as part of the path
@@ -55,7 +56,7 @@ class ClientController extends Controller
 
         $message = "Message sent successfully to the device $sn.";
         
-        return view('frontdesk.sendData', compact('sn','message'));
+        return redirect()->back()->with(compact('message'));
     }
 
     public function qrcode_view($sn)
@@ -69,6 +70,7 @@ class ClientController extends Controller
 
     public function qr(Request $request, $sn)
     {
+        //dd($request->all());
         $baseUrl = 'http://167.172.83.81:3000';
 
         // Construct the URL with the 'sn' as part of the path
@@ -81,8 +83,82 @@ class ClientController extends Controller
 
         $message = "QR sent successfully to the device $sn.";
         
-        return view('frontdesk.qrcode_view', compact('sn','message'));
+        return redirect()->back()->with(compact('message'));
     }
+
+
+    public function cashin(Request $request, $sn)
+    {
+        //dd($request->all());
+        // dd($sn);
+        $baseUrl = 'http://167.172.83.81:3000';
+
+        // Construct the URL with the 'sn' as part of the path
+        $url = "$baseUrl/cash-in/$sn";
+
+        $response = Http::post($url, [
+            'amount' => $request->input('amount'),
+            'phone' => $request->input('phone')
+        ]);
+
+        $message = "Cash-in successfull for the device $sn.";
+
+        return redirect()->back()->with(compact('message'));
+
+    }
+
+
+    public function cashout(Request $request, $sn)
+    {
+        //dd($request->all());
+        // dd($sn);
+        $baseUrl = 'http://167.172.83.81:3000';
+
+        // Construct the URL with the 'sn' as part of the path
+        $url = "$baseUrl/cash-out/$sn";
+
+        $response = Http::post($url, [
+            'amount' => $request->input('amount'),
+            'phone' => $request->input('phone')
+        ]);
+
+        $message = "Cash-out successfull for the device $sn.";
+
+        return redirect()->back()->with(compact('message'));
+
+    }
+
+
+    public function paybill(Request $request, $sn)
+    {
+        //dd($request->all());
+        // dd($sn);
+        $baseUrl = 'http://167.172.83.81:3000';
+
+        // Construct the URL with the 'sn' as part of the path
+        $url = "$baseUrl/bill-pay/$sn";
+
+        $response = Http::post($url, [
+            'amount' => $request->input('amount'),
+            'phone' => $request->input('phone')
+        ]);
+
+        $message = "Bill Pay successfull for the device $sn.";
+
+        return redirect()->back()->with(compact('message'));
+
+    }
+
+
+    public function register_now(Request $request)
+    {
+        // dd($request->all());
+        $phone = $request['phone'];
+        $message = "Device has been registered for the Marchant- $phone successfully.";
+
+        return redirect()->back()->with(compact('message'));
+    }
+
 
     
 

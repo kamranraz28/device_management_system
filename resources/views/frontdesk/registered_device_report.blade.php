@@ -20,7 +20,7 @@
 <br>
     <div class="row">
         <div class="col-sm-12">
-        <h2>Warranty Activation Report</h2>
+        <h2>Registered Device Report</h2>
             <div class="card">
 
                 <div class="card-body pt-3">
@@ -38,8 +38,8 @@
                                             <th>MSISDN</th>
                                             <th>IMEI</th>
                                             <th>Device SN</th>
-                                            <th>Activation Date</th>
-                                            <th>Last Warranty Date</th>
+                                            <th>Registered Date</th>
+                                            
                                       
                                         </tr>
                                     </thead>
@@ -48,50 +48,50 @@
                                             <td>1</td>
                                             <td>Kamran Telecom</td>
                                             <th>01609758371</th>
-                                            <th>9847609856</th>
-                                            <td>984760985</td>
+                                            <th>12345678</th>
+                                            <td>1234567</td>
                                             <td>20-03-2023</td>
-                                            <td>19-03-2024</td>
+                                            
                                         </tr>
 
                                         <tr>
                                             <td>2</td>
                                             <td>Shakib Telecom</td>
                                             <th>01609758372</th>
-                                            <th>9847609854</th>
+                                            <th>123456786</th>
                                             <td>7654321</td>
                                             <td>20-03-2023</td>
-                                            <td>19-03-2024</td>
+                                            
                                         </tr>
 
                                         <tr>
                                             <td>3</td>
                                             <td>Tamim Telecom</td>
                                             <th>01709758377</th>
-                                            <th>9847609858</th>
+                                            <th>123456781</th>
                                             <td>9876098</td>
                                             <td>20-03-2023</td>
-                                            <td>19-03-2024</td>
+                                            
                                         </tr>
 
                                         <tr>
                                             <td>4</td>
                                             <td>Mash Telecom</td>
                                             <th>01609858377</th>
-                                            <th>9847609850</th>
+                                            <th>123456780</th>
                                             <td>8764567</td>
                                             <td>20-03-2023</td>
-                                            <td>19-03-2024</td>
+                                            
                                         </tr>
 
                                         <tr>
                                             <td>5</td>
                                             <td>Kajal Telecom</td>
                                             <th>01609858377</th>
-                                            <th>9847609851</th>
+                                            <th>123456787</th>
                                             <td>5670567</td>
                                             <td>20-03-2023</td>
-                                            <td>19-03-2024</td>
+                                            
                                         </tr>
 
                                     </tbody>

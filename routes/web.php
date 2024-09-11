@@ -18,6 +18,54 @@ use App\Http\Controllers\ClientController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Clear Cache facade value:
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    return '<h1>Cache facade value cleared</h1>';
+});
+
+//Reoptimized class loader:
+Route::get('/optimize', function() {
+    $exitCode = Artisan::call('optimize');
+    return '<h1>Reoptimized class loader</h1>';
+});
+
+Route::get('/config-clear', function() {
+    $exitCode = Artisan::call('config:clear');
+    return '<h1>Config Clear loader</h1>';
+});
+
+
+
+//Route cache:
+Route::get('/route-cache', function() {
+    $exitCode = Artisan::call('route:cache');
+    return '<h1>Routes cached</h1>';
+});
+
+//Clear Route cache:
+Route::get('/route-clear', function() {
+    $exitCode = Artisan::call('route:clear');
+    return '<h1>Route cache cleared</h1>';
+});
+
+//Clear View cache:
+Route::get('/view-clear', function() {
+    $exitCode = Artisan::call('view:clear');
+    return '<h1>View cache cleared</h1>';
+});
+
+//Clear View cache:
+Route::get('/storage-link', function() {
+    $exitCode = Artisan::call('storage:link');
+    return '<h1>Storage Link Created </h1>';
+});
+
+//Clear Config cache:
+Route::get('/config-cache', function() {
+    $exitCode = Artisan::call('config:cache');
+    return '<h1>Clear Config cleared</h1>';
+});
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
@@ -44,7 +92,6 @@ Route::post('/final_approve', [FrontdeskController::class, 'final_approve'])->na
 
 Route::get('/warranty_activation', [FrontdeskController::class, 'warranty_activation'])->name('warranty_activation');
 
-Route::get('/device_activation_report', [FrontdeskController::class, 'device_activation_report'])->name('device_activation_report');
 
 Route::get('/real_list', [ClientController::class, 'real_list'])->name('real_list');
 
@@ -56,6 +103,36 @@ Route::get('/qrcode_view/{sn}', [ClientController::class, 'qrcode_view'])->name(
 
 
 Route::post('/qr/{sn}', [ClientController::class, 'qr'])->name('qr');
+
+Route::get('/user', [FrontdeskController::class, 'user'])->name('user');
+Route::get('/new_user_add', [FrontdeskController::class, 'new_user_add'])->name('new_user_add');
+Route::post('/storeUser', [FrontdeskController::class, 'storeUser'])->name('storeUser');
+
+Route::post('/cashin/{sn}', [ClientController::class, 'cashin'])->name('cashin');
+Route::post('/cashout/{sn}', [ClientController::class, 'cashout'])->name('cashout');
+Route::post('/paybill/{sn}', [ClientController::class, 'paybill'])->name('paybill');
+
+
+Route::get('/total_device', [FrontdeskController::class, 'total_device'])->name('total_device');
+
+Route::post('/register_now', [ClientController::class, 'register_now'])->name('register_now');
+
+
+//Report
+Route::get('/device_activation_report', [FrontdeskController::class, 'device_activation_report'])->name('device_activation_report');
+Route::get('/stock_report', [FrontdeskController::class, 'stock_report'])->name('stock_report');
+Route::get('/registered_device_report', [FrontdeskController::class, 'registered_device_report'])->name('registered_device_report');
+Route::get('/unregistered_device_report', [FrontdeskController::class, 'unregistered_device_report'])->name('unregistered_device_report');
+Route::get('/device_repair_report', [FrontdeskController::class, 'device_repair_report'])->name('device_repair_report');
+
+
+
+
+
+
+
+
+
 
 
 
