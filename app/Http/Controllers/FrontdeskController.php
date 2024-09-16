@@ -151,5 +151,10 @@ class FrontdeskController extends Controller
     {
         return view('frontdesk.total_device');
     }
+
+    public function transection_log()
+    {
+        return view('frontdesk.transection_log');
+    }
     
 }

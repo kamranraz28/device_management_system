@@ -38,6 +38,7 @@
                       <th>Cash In</th>
                       <th>Cash Out</th>
                       <th>Bill Pay</th>
+                      
 
 
                     </tr>
@@ -81,15 +82,20 @@
               }
               }
 
+              // Determine the status display
+              // Determine the status display
+              $statusIcon = ($status == '1') ? '<i class="fas fa-lightbulb" style="color: #28a745; font-size: 1.5em;"></i>' : '<i class="fas fa-lightbulb" style="color: #dc3545; font-size: 1.5em;"></i>';
+
+
               // dump($status);
 
               // Determine the last active status
               if ($status == '1') {
-              $lastActive = 'Active';
+                $lastActive = 'Active';
               } elseif ($status == '2') {
-              $lastActive = \Carbon\Carbon::parse($data['last_active'])->format('Y-m-d H:i:s');
+                  $lastActive = \Carbon\Carbon::parse($data['last_active'])->format('Y-m-d H:i:s');
               } else {
-              $lastActive = 'Never Activated';
+                  $lastActive = 'Never Activated';
               }
             @endphp
                       <tr id="sn-{{ $data['sn'] }}">
@@ -102,13 +108,10 @@
                         </div>
                         </td>
                         <td>{{ $data['port'] }}</td>
-                        <td>
-                        @if($status == '1')
-              <i class="fas fa-lightbulb" class="active-light-bulb" style="color: #28a745; font-size: 1.5em;"></i>
-            @else
-        <i class="fas fa-lightbulb"  class="active-light-bulb"  style="color: #6c757d; font-size: 1.5em;"></i>
-      @endif
-                        </td> <!-- Display Status with Icon -->
+                        <td class="status-cell">
+                          {!! $statusIcon !!}
+                        </td>
+
                         <td>{{ $data['imei'] }}</td>
                         <td>{{ $data['imsi'] }}</td>
                         <td>{{$batteryHealth}}</td>
@@ -158,6 +161,8 @@
                         </button>
                         </td>
 
+                        
+
                       </tr>
           @endforeach
                   </tbody>
@@ -174,6 +179,92 @@
 
 
 @section('js')
+
+
+
+
+<script>
+  // Use a Set to track currently active SNs
+  // Use a Set to track currently active SNs
+// Use a Set to track currently active SNs
+let activeSnsSet = new Set();
+let lastActiveTimes = {}; // Object to track the last active time of each SN
+
+function updateStatus(newActiveSns) {
+  const rows = document.querySelectorAll('#clients-table-body tr');
+  rows.forEach(row => {
+    const sn = row.id.replace('sn-', ''); // Extract SN from the row's ID
+    const statusCell = row.querySelector('.status-cell');
+    const lastActiveCell = row.querySelector('td:nth-child(10)'); // Adjust this if needed
+
+    if (statusCell && lastActiveCell) {
+      if (newActiveSns.has(sn)) { // If the SN is currently active
+        // Update the status cell with active status
+        statusCell.innerHTML = '<i class="fas fa-lightbulb" style="color: #28a745; font-size: 1.5em;"></i>';
+
+        // Update the last active cell with current time
+        lastActiveTimes[sn] = new Date(); // Store current time as last active time
+        lastActiveCell.innerHTML = formatTime(lastActiveTimes[sn]);
+      } else { // If the SN is not active
+        // Update the status cell with inactive status
+        statusCell.innerHTML = '<i class="fas fa-lightbulb" style="color: #dc3545; font-size: 1.5em;"></i>';
+
+        // Update the last active cell with paused time
+        if (lastActiveTimes[sn]) {
+          lastActiveCell.innerHTML = formatTime(lastActiveTimes[sn]);
+        }
+      }
+    }
+  });
+}
+
+function formatTime(date) {
+  // Format the time to 'YYYY-MM-DD HH:MM:SS'
+  return date.toISOString().slice(0, 19).replace('T', ' ');
+}
+
+function updateTimes() {
+  const now = new Date();
+  document.querySelectorAll('#clients-table-body tr').forEach(row => {
+    const sn = row.id.replace('sn-', '');
+    const lastActiveCell = row.querySelector('td:nth-child(10)'); // Adjust this if needed
+
+    if (lastActiveCell) {
+      if (activeSnsSet.has(sn)) {
+        lastActiveCell.innerHTML = formatTime(new Date());
+      } else if (lastActiveTimes[sn]) {
+        lastActiveCell.innerHTML = formatTime(lastActiveTimes[sn]);
+      }
+    }
+  });
+}
+
+setInterval(function() {
+  console.log('Running update...');
+  fetch('http://167.172.83.81:3000/clients')
+    .then(res => res.json())
+    .then(dt => {
+      console.log(dt);
+
+      // Get an array of active SNs from the fetched data
+      let newActiveSns = new Set(dt.map(s => s.sn));
+
+      // Update the status for active and inactive SNs
+      updateStatus(newActiveSns);
+
+      // Update the activeSnsSet with new active SNs
+      activeSnsSet = newActiveSns;
+    })
+    .catch(error => {
+      console.error('Error fetching clients data:', error);
+    });
+
+  // Update displayed times
+  updateTimes();
+}, 5000); // 5000 milliseconds (5 seconds) interval
+
+
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -193,7 +284,7 @@
             '<form action="/cashin/' + visitor_id + '" method="post">' +  // Inject visitor_id into the action URL
             '   @csrf' +
             '   <div class="form-group">' +
-            '       <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter Amount" required>' +
+            '   <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount" >' +
             '   </div>' +
             '   <div class="form-group">' +
             '       <input type="tel" name="phone" id="phone" class="form-control" placeholder="Enter Phone Number" required>' +
@@ -228,7 +319,7 @@
             '<form action="/cashout/' + visitor_id + '" method="post">' +  // Inject visitor_id into the action URL
             '   @csrf' +
             '   <div class="form-group">' +
-            '       <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter Amount" required>' +
+            '       <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount" required>' +
             '   </div>' +
             '   <div class="form-group">' +
             '       <input type="tel" name="phone" id="phone" class="form-control" placeholder="Enter Phone Number" required>' +
@@ -264,7 +355,7 @@
             '<form action="/paybill/' + visitor_id + '" method="post">' +  // Inject visitor_id into the action URL
             '   @csrf' +
             '   <div class="form-group">' +
-            '       <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter Amount" required>' +
+            '       <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter Amount" required>' +
             '   </div>' +
             '   <div class="form-group">' +
             '       <input type="tel" name="phone" id="phone" class="form-control" placeholder="Enter Phone Number" required>' +
@@ -316,8 +407,6 @@
 </script>
 <!-- QR End-->
 
-
-
 <!-- Message Start-->
 <script>
   // Use event delegation to handle click events for all buttons with the class 'approveButton'
@@ -347,22 +436,8 @@
       });
     });
   });
-  setInterval(function(){
-    console.log('running');
-    fetch('http://167.172.83.81:3000/clients').then(res=>{return res.json()}).then(dt=>{
-      console.log(dt);
-      let ids = dt.map(s=>s.sn);
-      document.querySelectorAll('.active-light-bulb').forEach(item=>{
-        item.style.color = '#6c757d'
-      })
-      ids.forEach(sn=>{
-        let x = document.querySelector('tr#sn-'+sn+' .active-light-bulb');
-        if(!x) return;
-        x.style.color="#28a745"
-      })
-    })
-  },5000)
 </script>
 <!-- Message End-->
+
 
 @endsection

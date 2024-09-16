@@ -54,6 +54,7 @@
                     <a class="dropdown-item" href="{{ route('unregistered_device_report') }}" style="color: #e8146c;">Unregistered Device Report</a>
                     <a class="dropdown-item" href="{{ route('device_repair_report') }}" style="color: #e8146c;">Device Repair Report</a>
                     <a class="dropdown-item" href="{{ route('device_activation_report') }}" style="color: #e8146c;">Warranty Activation Report</a>
+                    <a class="dropdown-item" href="{{ route('transection_log') }}" style="color: #e8146c;">transection_log</a>
 
                 </div>
             </li>

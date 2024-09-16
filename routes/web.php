@@ -126,6 +126,7 @@ Route::get('/unregistered_device_report', [FrontdeskController::class, 'unregist
 Route::get('/device_repair_report', [FrontdeskController::class, 'device_repair_report'])->name('device_repair_report');
 
 
+Route::get('/transection_log', [FrontdeskController::class, 'transection_log'])->name('transection_log');
 
 
 
