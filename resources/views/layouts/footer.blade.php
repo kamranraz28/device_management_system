@@ -1,55 +1,61 @@
-<footer class="footer footer-one">
-    <div class="footer-top aos" data-aos="fade-up">
+<footer class="footer footer-one mt-5">
+    <style>
+        .footer {
+            background: #111;
+            color: #fff;
+            padding: 40px 0 20px;
+            font-size: 14px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .footer-logo img {
+            width: 120px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            background: #000;
+            padding: 15px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .copyright-text {
+            color: #bbb;
+            font-size: 13px;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .footer-logo img {
+                width: 80px;
+            }
+        }
+    </style>
+
+    <div class="footer-top text-center">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <div class="footer-widget footer-about text-center">
-                        <div class="footer-logo">
-                            <img style="width: 18%; filter: brightness(0) invert(1);" class="centerm" src="{{ asset('assets/img/logo.png') }}" alt="Lab Quest Limited">
-                        </div>
-                        {{--<div class="d-flex justify-content-center">
-                            <p style="color: white;"><span style="color: white; font-weight: 700;">Customer Support</span><br />
-                                <i class="feather-headphones"></i> +88 09678777146</p>
-                        </div>
-                        <div class="social-icon d-flex justify-content-center">
-                            <ul>
-                                <li>
-                                    <a href="javascript:;" target="_blank" style="color: white;"><i class="fab fa-google-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" target="_blank" style="color: white;"><i class="fab fa-facebook"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" target="_blank" style="color: white;"><i class="fab fa-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" target="_blank" style="color: white;"><i class="fab fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" target="_blank" style="color: white;"><i class="fab fa-linkedin-in"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" target="_blank" style="color: white;"><i class="fab fa-pinterest"></i></a>
-                                </li>
-                            </ul>
-                        </div>--}}
-                    </div>
+            <div class="footer-widget footer-about">
+                <div class="footer-logo">
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="Lab Quest Limited" style="filter: brightness(0) invert(1);">
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="footer-bottom">
+
+    <div class="footer-bottom text-center">
         <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-12 col-lg-12">
-                        <div class="copyright-text">
-                            <p style="text-align:center; color: white;" class="mb-0"> Copyright © 2024 <a href="" target="_blank" style="color: white;">Salextra Limited</a> All Rights Reserved</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p class="mb-0">
+                © 2024 <a href="#" style="color: #fff;">Salextra Limited</a>. All Rights Reserved.
+            </p>
         </div>
     </div>
 </footer>
